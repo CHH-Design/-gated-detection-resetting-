@@ -1,0 +1,46 @@
+\subsection{How much can an interior optimum save?}
+Let $T_e=\min(T(0),T(1))$. A comparison with full redraw alone can credit a mixed strategy for an improvement already attainable by full retention. To isolate the benefit of choosing an intermediate policy, define
+\[
+   G=1-\frac{\min_{0\le c\le1}T(c)}{T_e}.
+\]
+
+\paragraph{Uniform gain bound.}
+For the homogeneous driven three-state ring of Proposition 2 and a flight made up of any finite number of independent exponential stages with positive, possibly unequal rates,
+\begin{equation}
+  0\le G < \frac{\exp(-K-1)}{K}<1.014\times10^{-4},
+  \qquad K=\frac{7\pi\sqrt{3}}{6}.
+  \label{eq:gainbound}
+\end{equation}
+The same bound holds for a deterministic flight. The bound is uniform over the reset rate, the stage rates, and the two positive ring jump rates; the constant is not asserted to be sharp.
+
+\paragraph{Proof.}
+If an endpoint minimizes $T$ then $G=0$. At a strict interior minimum, let $\theta$ be the unwrapped phase of $L(r+a-ib)$ in Eq.~(\ref{eq:three}). For the flight laws in the statement $\theta\ge0$. The phase test implies $\theta-\alpha+2\gamma>3\pi/2$. Consequently $\theta>7\pi/6$ since $\gamma<\pi/6$. This inequality holds in every phase window, not only the first one.
+
+For a stage of rate $k$, put $u=\arctan[b/(k+a+r)]$ and $h=(a+r)/b$. The modulus of its complex Laplace factor is
+\[
+ \frac{k}{\sqrt{(k+r+a)^2+b^2}}=\cos u-h\sin u\le e^{-hu}.
+\]
+Indeed the logarithm of the middle expression is concave where it is positive, and its tangent at zero is $-hu$. Independence multiplies the moduli and adds the phases. Thus $|L(r+a-ib)|\le e^{-h\theta}$. For a deterministic flight the same statement is an equality.
+
+Let $x=r/a$. Equations~(\ref{eq:base}) and (\ref{eq:three}), together with $T_e\le T(0)$, yield at the optimum $c_*$
+\[
+ G\le \frac{|T(c_*)-T(0)|}{T(0)}
+ \le \frac{2r\,|L(r+a-ib)|}{a[3-L(r)]}
+ \le x\,e^{-h\theta}.
+\]
+Since $b/a<1/\sqrt3$, this is bounded by $x e^{-K(1+x)}$. Its maximum over $x>0$ is $e^{-K-1}/K$ at $x=1/K$, proving (\ref{eq:gainbound}). \hfill$\square$
+
+For a numerical scale, Table~\ref{tab:gains} samples the first minimum window. For each choice of $b/a,r/a,c_*$ we solved the stationary-phase equation for the flight time or the Erlang rate and discarded infeasible rates. The grid used 24 equally spaced $b/a$ values in $[0.35,0.577]$, 55 geometrically spaced $r/a$ values in $[0.008,2]$, and 77 equally spaced choices of $c_*$ in $[0.025,0.975]$. The values are attained examples, not global optima. To avoid loss of precision, subtraction in the full renewal equation was checked with 60-decimal arithmetic for every reported finite-stage example.
+
+\begin{table}[ht]\centering
+\caption{Largest fractional advantage over the better endpoint found on the stated grid. $G$ is a fraction, not a percentage. All selected grid points have $b/a=0.577$.}\label{tab:gains}
+\begin{tabular}{rrrr}
+Stages & $r/a$ & $c_*$ & $G$\\\hline
+9 & 0.02464 & 0.5000 & $2.86\times10^{-14}$\\
+12 & 0.07586 & 0.5125 & $2.07\times10^{-10}$\\
+24 & 0.14011 & 0.5250 & $2.83\times10^{-8}$\\
+60 & 0.21091 & 0.5375 & $1.61\times10^{-7}$\\
+240 & 0.21091 & 0.5375 & $3.19\times10^{-7}$\\
+Deterministic & 0.21091 & 0.5375 & $3.93\times10^{-7}$
+\end{tabular}
+\end{table}
